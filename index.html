@@ -129,6 +129,7 @@ const STATUS = {
 
 function extractDois(text) {
   try { text = decodeURIComponent(text); } catch (e) {}
+  text = text.replace(/,(?=\s*(https?:\/\/(dx\.)?doi\.org\/)?10\.)/gi, " ");  // a comma before the next DOI separates them
   const out = [];
   for (const m of text.matchAll(DOI_RE)) {
     const d = m[0].replace(/[.,;:)\]}>'"]+$/, "").toLowerCase();
